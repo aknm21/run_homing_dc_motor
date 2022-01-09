@@ -47,10 +47,10 @@ void loop()
 
   if (motorState == 0 && digitalRead(START_BUTTON) == HIGH)
   {
-    digitalWrite(LED_BUILTIN, HIGH);
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, HIGH);
     digitalWrite(MOTOR_B, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
     motorState = 1;
   }
 
