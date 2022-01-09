@@ -11,8 +11,8 @@
 #define MOTOR_A 9
 #define MOTOR_B 10
 #define START_BUTTON 5
-#define LIMIT_BUTTON_START 6
-#define LIMIT_BUTTON_END 7
+#define LIMIT_SWITCH_START 6
+#define LIMIT_SWITCH_END 7
 int motorState = 0;
 
 #define SPEAKER 12   // スピーカーの出力ピン番号
@@ -24,8 +24,8 @@ void setup()
   pinMode(MOTOR_A, OUTPUT);
   pinMode(MOTOR_B, OUTPUT);
   pinMode(START_BUTTON, INPUT_PULLUP);
-  pinMode(LIMIT_BUTTON_START, INPUT_PULLUP);
-  pinMode(LIMIT_BUTTON_END, INPUT_PULLUP);
+  pinMode(LIMIT_SWITCH_START, INPUT_PULLUP);
+  pinMode(LIMIT_SWITCH_END, INPUT_PULLUP);
 
   digitalWrite(MOTOR_A, LOW);
   digitalWrite(MOTOR_B, LOW);
@@ -39,9 +39,9 @@ void loop()
   // Serial.print("BTN: ");
   // Serial.print(digitalRead(START_BUTTON));
   // Serial.print(", STA: ");
-  // Serial.print(digitalRead(LIMIT_BUTTON_START));
+  // Serial.print(digitalRead(LIMIT_SWITCH_START));
   // Serial.print(", END: ");
-  // Serial.print(digitalRead(LIMIT_BUTTON_END));
+  // Serial.print(digitalRead(LIMIT_SWITCH_END));
   // Serial.print(", motorState: ");
   // Serial.println(motorState);
 
@@ -54,7 +54,7 @@ void loop()
     motorState = 1;
   }
 
-  if (motorState == 1 && digitalRead(LIMIT_BUTTON_END) == HIGH)
+  if (motorState == 1 && digitalRead(LIMIT_SWITCH_END) == HIGH)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
@@ -66,7 +66,7 @@ void loop()
     motorState = 2;
   }
 
-  if (motorState == 2 && digitalRead(LIMIT_BUTTON_START) == HIGH)
+  if (motorState == 2 && digitalRead(LIMIT_SWITCH_START) == HIGH)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
