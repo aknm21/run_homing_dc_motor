@@ -71,9 +71,7 @@ void loop()
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
     digitalWrite(MOTOR_B, LOW);
-    motorState = 0;
     digitalWrite(LED_BUILTIN, LOW);
+    motorState = 0;
   }
-
-  delay(100);
 }
