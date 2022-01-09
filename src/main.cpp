@@ -1,8 +1,9 @@
 /**
- * Blink
+ * モーター往復駆動
  *
- * Turns on an LED on for one second,
- * then off for one second, repeatedly.
+ * ボタン押下によりDCモーターが駆動開始する。
+ * 終端位置のリミットスイッチのON検出で、
+ * 原位置のリミットスイッチONまでモーターが逆転駆動する。
  */
 #include "Arduino.h"
 
