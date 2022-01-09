@@ -37,11 +37,13 @@ void setup()
 void loop()
 {
   // Serial.print("BTN: ");
-  // Serial.println(buttonState);
+  // Serial.print(digitalRead(START_BUTTON));
   // Serial.print(", STA: ");
   // Serial.print(digitalRead(LIMIT_BUTTON_START));
   // Serial.print(", END: ");
   // Serial.print(digitalRead(LIMIT_BUTTON_END));
+  // Serial.print(", motorState: ");
+  // Serial.println(motorState);
 
   if (motorState == 0 && digitalRead(START_BUTTON) == HIGH)
   {
