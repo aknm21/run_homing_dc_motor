@@ -46,7 +46,7 @@ void loop()
   // Serial.print(", motorState: ");
   // Serial.println(motorState);
 
-  if (motorState == 0 && digitalRead(START_BUTTON) == HIGH)
+  if (motorState == 0 && digitalRead(START_BUTTON) == LOW)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, HIGH);
@@ -55,7 +55,7 @@ void loop()
     motorState = 1;
   }
 
-  if (motorState == 1 && digitalRead(LIMIT_SWITCH_END) == HIGH)
+  if (motorState == 1 && digitalRead(LIMIT_SWITCH_END) == LOW)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
@@ -67,7 +67,7 @@ void loop()
     motorState = 2;
   }
 
-  if (motorState == 2 && digitalRead(LIMIT_SWITCH_START) == HIGH)
+  if (motorState == 2 && digitalRead(LIMIT_SWITCH_START) == LOW)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
