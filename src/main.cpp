@@ -13,7 +13,6 @@
 #define START_BUTTON 8
 #define LIMIT_BUTTON_START 6
 #define LIMIT_BUTTON_END 7
-int buttonState = 0;
 int motorState = 0;
 
 #define BEATTIME 100 //音を出している時間(msec)
@@ -32,7 +31,6 @@ void setup()
 
 void loop()
 {
-  buttonState = digitalRead(START_BUTTON);
   // Serial.print("BTN: ");
   // Serial.println(buttonState);
   // Serial.print(", STA: ");
@@ -40,7 +38,7 @@ void loop()
   // Serial.print(", END: ");
   // Serial.print(digitalRead(LIMIT_BUTTON_END));
 
-  if (motorState == 0 && buttonState == HIGH)
+  if (motorState == 0 && digitalRead(START_BUTTON) == HIGH)
   {
     digitalWrite(LED_BUILTIN, HIGH);
     tone(SPEAKER, 262, BEATTIME);
