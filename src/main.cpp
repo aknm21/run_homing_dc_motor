@@ -1,8 +1,9 @@
 /**
- * Blink
+ * モーター往復駆動
  *
- * Turns on an LED on for one second,
- * then off for one second, repeatedly.
+ * ボタン押下によりDCモーターが駆動開始する。
+ * 終端位置のリミットスイッチのON検出で、
+ * 原位置のリミットスイッチONまでモーターが逆転駆動する。
  */
 #include "Arduino.h"
 
@@ -10,46 +11,51 @@
 // #define LED_BUILTIN 13
 #define MOTOR_A 9
 #define MOTOR_B 10
-#define START_BUTTON 8
-#define LIMIT_BUTTON_START 6
-#define LIMIT_BUTTON_END 7
-int buttonState = 0;
+#define START_BUTTON 5
+#define LIMIT_SWITCH_START 6
+#define LIMIT_SWITCH_END 7
 int motorState = 0;
 
-#define BEATTIME 100 //音を出している時間(msec)
-#define SPEAKER 12   //スピーカーの出力ピン番号
+#define SPEAKER 12   // スピーカーの出力ピン番号
+#define BEATTIME 100 // 音を出している時間(msec)
 
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(MOTOR_A, OUTPUT);
   pinMode(MOTOR_B, OUTPUT);
-  pinMode(START_BUTTON, INPUT);
-  pinMode(LIMIT_BUTTON_START, INPUT);
-  pinMode(LIMIT_BUTTON_END, INPUT);
+  pinMode(START_BUTTON, INPUT_PULLUP);
+  pinMode(LIMIT_SWITCH_START, INPUT_PULLUP);
+  pinMode(LIMIT_SWITCH_END, INPUT_PULLUP);
+
+  digitalWrite(MOTOR_A, LOW);
+  digitalWrite(MOTOR_B, LOW);
+
   // Serial.begin(9600);
+  delay(1000);
 }
 
 void loop()
 {
-  buttonState = digitalRead(START_BUTTON);
   // Serial.print("BTN: ");
-  // Serial.println(buttonState);
+  // Serial.print(digitalRead(START_BUTTON));
   // Serial.print(", STA: ");
-  // Serial.print(digitalRead(LIMIT_BUTTON_START));
+  // Serial.print(digitalRead(LIMIT_SWITCH_START));
   // Serial.print(", END: ");
-  // Serial.print(digitalRead(LIMIT_BUTTON_END));
+  // Serial.print(digitalRead(LIMIT_SWITCH_END));
+  // Serial.print(", motorState: ");
+  // Serial.println(motorState);
 
-  if (motorState == 0 && buttonState == HIGH)
+  if (motorState == 0 && digitalRead(START_BUTTON) == HIGH)
   {
-    digitalWrite(LED_BUILTIN, HIGH);
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, HIGH);
     digitalWrite(MOTOR_B, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
     motorState = 1;
   }
 
-  if (motorState == 1 && digitalRead(LIMIT_BUTTON_END) == HIGH)
+  if (motorState == 1 && digitalRead(LIMIT_SWITCH_END) == HIGH)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
@@ -61,14 +67,12 @@ void loop()
     motorState = 2;
   }
 
-  if (motorState == 2 && digitalRead(LIMIT_BUTTON_START) == HIGH)
+  if (motorState == 2 && digitalRead(LIMIT_SWITCH_START) == HIGH)
   {
     tone(SPEAKER, 262, BEATTIME);
     digitalWrite(MOTOR_A, LOW);
     digitalWrite(MOTOR_B, LOW);
-    motorState = 0;
     digitalWrite(LED_BUILTIN, LOW);
+    motorState = 0;
   }
-
-  delay(100);
 }
