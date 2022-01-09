@@ -10,7 +10,7 @@
 // #define LED_BUILTIN 13
 #define MOTOR_A 9
 #define MOTOR_B 10
-#define START_BUTTON 8
+#define START_BUTTON 5
 #define LIMIT_BUTTON_START 6
 #define LIMIT_BUTTON_END 7
 int motorState = 0;
@@ -23,9 +23,9 @@ void setup()
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(MOTOR_A, OUTPUT);
   pinMode(MOTOR_B, OUTPUT);
-  pinMode(START_BUTTON, INPUT);
-  pinMode(LIMIT_BUTTON_START, INPUT);
-  pinMode(LIMIT_BUTTON_END, INPUT);
+  pinMode(START_BUTTON, INPUT_PULLUP);
+  pinMode(LIMIT_BUTTON_START, INPUT_PULLUP);
+  pinMode(LIMIT_BUTTON_END, INPUT_PULLUP);
   // Serial.begin(9600);
 }
 
