@@ -15,8 +15,8 @@
 #define LIMIT_BUTTON_END 7
 int motorState = 0;
 
-#define BEATTIME 100 //音を出している時間(msec)
-#define SPEAKER 12   //スピーカーの出力ピン番号
+#define SPEAKER 12   // スピーカーの出力ピン番号
+#define BEATTIME 100 // 音を出している時間(msec)
 
 void setup()
 {
@@ -26,7 +26,12 @@ void setup()
   pinMode(START_BUTTON, INPUT_PULLUP);
   pinMode(LIMIT_BUTTON_START, INPUT_PULLUP);
   pinMode(LIMIT_BUTTON_END, INPUT_PULLUP);
+
+  digitalWrite(MOTOR_A, LOW);
+  digitalWrite(MOTOR_B, LOW);
+
   // Serial.begin(9600);
+  delay(1000);
 }
 
 void loop()
